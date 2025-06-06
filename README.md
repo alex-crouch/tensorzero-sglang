@@ -1,4 +1,4 @@
-# TensorZero Local Setup
+# TensorZero SGLang Setup
 
 This repository contains a Docker Compose setup for running TensorZero locally with SGLang and the Qwen3-32B-AWQ model.
 
@@ -14,8 +14,7 @@ TensorZero is a platform for building reliable LLM applications. This setup incl
 ## Prerequisites
 
 - Docker and Docker Compose
-- NVIDIA GPU with sufficient VRAM (recommended: 24GB+ for Qwen3-32B-AWQ)
-- NVIDIA Container Toolkit installed
+- NVIDIA GPU with sufficient VRAM (recommended: ~24GB for Qwen3-32B-AWQ)
 
 ## Environment Setup
 
@@ -38,7 +37,7 @@ HF_TOKEN=your_huggingface_token_here
 1. Clone this repository:
 ```bash
 git clone <your-repo-url>
-cd tensorzero
+cd tensorzero-sglang
 ```
 
 2. Set up environment variables (see Environment Setup above)
@@ -197,9 +196,7 @@ Modify `config/tensorzero.toml` to add:
 
 ## Security Notes
 
-- This setup is for development/learning purposes
 - For production use, refer to [TensorZero deployment docs](https://www.tensorzero.com/docs/gateway/deployment)
-- Never commit API keys to version control
 - Use proper authentication in production environments
 
 ## Resources
