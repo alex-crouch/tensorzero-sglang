@@ -3,7 +3,9 @@
 
 services:
   sglang:
-    image: docker.io/library/sglang-with-vllm
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: sglang
     volumes:
       - ${HOME}/.cache/huggingface:/root/.cache/huggingface

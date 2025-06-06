@@ -6,10 +6,14 @@ This repository contains a Docker Compose setup for running TensorZero locally w
 
 TensorZero is a platform for building reliable LLM applications. This setup includes:
 
-- **SGLang**: Serving the Qwen3-32B-AWQ model locally
+- **SGLang**: Serving the Qwen3-32B-AWQ model locally (using a custom Docker image with vLLM 0.8.4)
 - **ClickHouse**: Database for storing inference data and analytics
 - **TensorZero Gateway**: HTTP API for interacting with models
 - **TensorZero UI**: Web interface for monitoring and analytics
+
+## Custom SGLang Image
+
+This setup uses a custom SGLang Docker image that includes vLLM 0.8.4 for compatibility. The custom image is built from the `Dockerfile` in this repository. The image is automatically built when you run `docker-compose up` for the first time. Subsequent runs will use the cached image unless you rebuild it explicitly.
 
 ## Prerequisites
 
@@ -42,10 +46,12 @@ cd tensorzero-sglang
 
 2. Set up environment variables (see Environment Setup above)
 
-3. Start the services:
+3. Build and start the services:
 ```bash
 docker-compose up -d
 ```
+
+Note: The first run will take some time as it builds the custom SGLang image with vLLM 0.8.4.
 
 4. Wait for all services to be healthy:
 ```bash
@@ -168,6 +174,15 @@ docker-compose logs -f
 
 # View logs for specific service
 docker-compose logs -f sglang
+
+# Rebuild the custom SGLang image (if Dockerfile changes)
+docker-compose build sglang
+
+# Rebuild and restart all services
+docker-compose up -d --build
+
+# Force rebuild without cache
+docker-compose build --no-cache sglang
 
 # Restart services
 docker-compose restart
