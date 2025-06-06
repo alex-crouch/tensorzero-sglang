@@ -1,20 +1,19 @@
 [models.qwen3_local]
-routing = ["sglang"]                      # List of allowed providers
+routing = ["sglang"] # List of allowed providers
 
 # ---- Provider block ---------------------------------------------------------
 [models.qwen3_local.providers.sglang]
-type             = "sglang"               # Built-in provider
-api_base         = "http://host.docker.internal:30000/v1"
-api_key_location = "none"                 # SGLang default = no auth
-model_name       = "qwen3"                # Any label; must match the "model"
-                                           # field you’ll send at inference time
+type = "openai"                                   # openai provider as sglang native api has no tool call support
+api_base = "http://host.docker.internal:30000/v1"
+api_key_location = "none"                         # SGLang default = no auth
+model_name = "qwen3"
 
 ###############################################################################
-# 2)  Functions & variants (what users actually call)
+# 2)  Functions & variants
 ###############################################################################
 [functions.qwen]
 type = "chat"
 
 [functions.qwen.variants.default]
-type   = "chat_completion"
-model  = "qwen3_local"                    # Points back to the model block
+type = "chat_completion"
+model = "qwen3_local"    # Points back to the model block
